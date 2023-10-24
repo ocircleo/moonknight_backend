@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api info and link</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 60px;
+      }
+      .nav {
+        height: 50px;
+        width: 100%;
+        background-color: lightskyblue;
+        position: fixed;
+        z-index: 111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+      .nav a {
+        font-weight: 900;
+        text-decoration: none;
+        font-size: 19px;
+        color: black;
+      }
+      .nav a:hover {
+        color: white;
+      }
+
+      .nav-backup {
+        height: 50px;
+        width: 100%;
+        background-color: white;
+      }
+      .title {
+        text-align: center;
+        padding: 40px 10px;
+        text-transform: capitalize;
+      }
+      .sub-title {
+        text-decoration: underline;
+        text-decoration-color: lightskyblue;
+        text-decoration-thickness: 5px;
+        padding-bottom: 5px;
+        text-underline-offset: 8px;
+      }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
+      .api-detail-container {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        overflow-x: scroll;
+      }
+      .get {
+        border: 3px solid skyblue;
+        background-color: rgba(135, 207, 235, 0.1);
+      }
+      .post {
+        border: 3px solid green;
+        background-color: rgba(0, 128, 0, 0.1);
+      }
+      .put {
+        border: 3px solid orange;
+        background-color: rgba(255, 166, 0, 0.1);
+      }
+      .delete {
+        border: 3px solid red;
+        background-color: rgba(255, 0, 0, 0.1);
+      }
+      .api-link {
+        font-size: 19px;
+        font-weight: 700;
+        padding: 10px 0;
+      }
+      .btn {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 18px;
+        color: white;
+        background-color: black;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+      .copy-link {
+        background-color: white;
+        color: black;
+        border: 3px dashed black;
+        padding: 1px 10px;
+        font-weight: 900;
+        margin-left: 10px;
+      }
+      .scale-transition {
+        transition: 0.5s;
+        transform: scale(1);
+      }
+      .scale-transition:active {
+        transform: scale(0.8);
+      }
+      .detaill-div {
+        font-size: 18px;
+        padding: 10px 0;
+        display: none;
+      }
+
+      .hidden {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+      @media screen and (max-width: 450px) {
+        .nav {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .nav a {
+          font-weight: 600;
+          text-decoration: none;
+          font-size: 16px;
+          color: black;
+        }
+        .title {
+          font-size: 18px;
+        }
+        .container {
+          width: 95%;
+        }
+        .sub-title {
+          font-size: 17px;
+        }
+        .btn {
+          font-size: 15px;
+          margin: 5px 0;
+        }
+        .api-link {
+          font-size: 14px;
+        }
+        .api-detail-container > h2 {
+          font-size: 17px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <a href="#user">User Api</a>
+      <a href="#moderator">Moderator Api</a>
+      <a href="#admin">Admin Api</a>
+    </div>
+    <div class="nav-backup"></div>
+    <div class="container">
+      <h1 class="title">
+        welcome to api docs of Moon knight project <br />
+        hers all the api for our project
+      </h1>
+      <h2 class="api-for sub-title" id="user">User Apis</h2>
+      <div id="user-api"></div>
+      <h2 class="api-for sub-title" id="moderator">Moderator Apis</h2>
+      <div id="moderator-api"></div>
+      <h2 class="api-for sub-title" id="admin">Admin Apis</h2>
+      <div id="admin-api"></div>
+    </div>
+  </body>
+  <script>
+    let userApiDiv = document.getElementById("user-api");
+    let moderatorApiDiv = document.getElementById("moderator-api");
+    let adminApiDiv = document.getElementById("admin-api");
+
+    let userApi = [
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "get",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "post",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "put",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "delete",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+    ];
+    let moderatorApi = [
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "get",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "post",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "put",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "delete",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+    ];
+    let adminApi = [
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "get",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "post",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "put",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+      {
+        link: "https://moonkinghtLL.com/user",
+        method: "delete",
+        title: "User login",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+    ];
+
+    function pushData(arr, div) {
+      arr.map((ele) => {
+        div.innerHTML += `
+          <div class="${ele.method} api-detail-container">
+            <h2>Title : ${ele.title}</h2>
+              <p class="api-link">API Link : ${ele.link}</p>
+              <div>
+                <button class=" btn">Method : <span style="text-transform: uppercase;">${ele.method}</span></button>
+                <button class=" btn detaill scale-transition">Show more</button>
+                <button class="copy-link btn scale-transition">Copy link</button>
+
+              </div>
+              <div class="detaill-div hidden ">
+              Description :  ${ele.detaill}
+
+                </div>
+            </div>
+    `;
+      });
+    }
+
+    pushData(userApi, userApiDiv);
+    pushData(moderatorApi, moderatorApiDiv);
+    pushData(adminApi, adminApiDiv);
+    let copyLink = document.getElementsByClassName("copy-link");
+    let detaills = document.getElementsByClassName("detaill");
+    for (let copy of copyLink) {
+      copy.addEventListener("click", (e) => {
+        let target = e.target;
+        let link = target.parentElement.parentElement.children[0].innerText;
+        navigator.clipboard.writeText(link);
+        target.innerText = "Link Copied";
+        setTimeout(() => {
+          target.innerText = "Copy Link";
+        }, 1500);
+      });
+    }
+    for (let detaill of detaills) {
+      detaill.addEventListener("click", (e) => {
+        let target = e.target;
+        let detaillDiv =
+          target.parentElement.parentElement.children[
+            target.parentElement.parentElement.children.length - 1
+          ];
+        if (detaillDiv.classList.contains("hidden")) {
+          detaillDiv.classList.remove("hidden");
+          detaillDiv.classList.add("show");
+          target.innerText = "Show less";
+        } else {
+          detaillDiv.classList.remove("show");
+          detaillDiv.classList.add("hidden");
+          target.innerText = "Show more";
+        }
+      });
+    }
+  </script>
+</html>
