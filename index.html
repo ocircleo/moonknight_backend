@@ -299,7 +299,7 @@
     for (let copy of copyLink) {
       copy.addEventListener("click", (e) => {
         let target = e.target;
-        let link = target.parentElement.parentElement.children[0].innerText;
+        let link = target.parentElement.parentElement.children[1].innerText;
         navigator.clipboard.writeText(link);
         target.innerText = "Link Copied";
         setTimeout(() => {
