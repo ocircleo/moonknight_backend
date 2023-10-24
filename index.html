@@ -275,7 +275,7 @@
         div.innerHTML += `
           <div class="${ele.method} api-detail-container">
             <h2>Title : ${ele.title}</h2>
-              <p class="api-link">API Link : ${ele.link}</p>
+              <p class="api-link">API Link: ${ele.link}</p>
               <div>
                 <button class=" btn">Method : <span style="text-transform: uppercase;">${ele.method}</span></button>
                 <button class=" btn detaill scale-transition">Show more</button>
@@ -300,7 +300,8 @@
       copy.addEventListener("click", (e) => {
         let target = e.target;
         let link = target.parentElement.parentElement.children[1].innerText;
-        navigator.clipboard.writeText(link);
+        let mainLink = link.split(' ')[2];
+        navigator.clipboard.writeText(mainLink);
         target.innerText = "Link Copied";
         setTimeout(() => {
           target.innerText = "Copy Link";
