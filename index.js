@@ -1,22 +1,42 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require("cors");
+const path = require("path");
+const jwt = require("jsonwebtoken");
+const verifyJwt = require("./omniModules/jwt");
+//routes
 const userRoute = require("./routes/userRoutes");
 const moderatorRoute = require("./routes/moderatorRoutes");
 const adminRoute = require("./routes/adminRoutes");
-const path = require("path");
+
 //middleware
 app.use(express.json());
 require("dotenv").config();
+app.use(cors());
 
+//home page of apis
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/index.html"));
+});
+
+//test route for mongodb
+app.get("/test", verifyJwt, async (req, res) => {
+  let user = req.decoded.user;
+  res.send({ data: "hello world" });
+});
+app.post("/jwt", (req, res) => {
+  const user = req.body;
+  const token = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {
+    expiresIn: "24h",
+  });
+  res.send({ token });
+});
 //routes
 app.use("/user", userRoute);
 app.use("/moderator", moderatorRoute);
 app.use("/admin", adminRoute);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/index.html"));
-});
 // default route for error handling
 app.use((req, res) => {
   res.status(404).send("<h1> 404! not a route</h1>");
