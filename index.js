@@ -15,6 +15,7 @@ const adminRoute = require("./routes/adminRoutes");
  *
  * RAHAT, THIS IS THE SKELETON OF OUR BACKEND CODE |
  * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/host", hostRoute);
+ * PLEASE SWITCH TO DEV BRANCH BEFORE ANY WORK
  * 
  * ====================
  */
