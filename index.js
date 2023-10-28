@@ -7,9 +7,17 @@ const jwt = require("jsonwebtoken");
 const verifyJwt = require("./omniModules/jwt");
 //routes
 const userRoute = require("./routes/userRoutes");
+const hostRoute = require("./routes/hostRoutes");
 const moderatorRoute = require("./routes/moderatorRoutes");
 const adminRoute = require("./routes/adminRoutes");
-
+/**
+ * ===================
+ *
+ * RAHAT, THIS IS THE SKELETON OF OUR BACKEND CODE |
+ * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/host", hostRoute);
+ * 
+ * ====================
+ */
 //middleware
 app.use(express.json());
 require("dotenv").config();
@@ -34,6 +42,7 @@ app.post("/jwt", (req, res) => {
 });
 //routes
 app.use("/user", userRoute);
+app.use("/host", hostRoute);
 app.use("/moderator", moderatorRoute);
 app.use("/admin", adminRoute);
 
