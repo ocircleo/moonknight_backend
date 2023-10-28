@@ -6,6 +6,6 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.send("<h1>welcome host</h1>");
 });
-router.post("/create_host",verifyJwt, (req, res) => {});
+router.post("/create_host", verifyJwt, (req, res) => {});
 
 module.exports = router;

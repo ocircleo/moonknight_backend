@@ -33,6 +33,7 @@ app.get("/test", verifyJwt, async (req, res) => {
   let user = req.decoded.user;
   res.send({ data: "hello world" });
 });
+//Jwt token request
 app.post("/jwt", (req, res) => {
   const user = req.body;
   const token = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {
@@ -40,6 +41,7 @@ app.post("/jwt", (req, res) => {
   });
   res.send({ token });
 });
+
 //routes
 app.use("/user", userRoute);
 app.use("/host", hostRoute);
