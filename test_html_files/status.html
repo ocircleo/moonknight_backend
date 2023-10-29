@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      div {
+        border: 3px dashed black;
+        padding: 5px;
+        margin: 5px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Our server status info</h1>
+    <div id="root"></div>
+  </body>
+  <script>
+    let root = document.getElementById("root");
+    fetch("/admin/status")
+      .then((res) => res.json())
+      .then((data) => {
+        let get = `
+        <div>Platform: ${data.platform}</div>
+        <div>Architecture: ${data.arch}</div>
+      <div>Freemem: ${(data.freemem /1024/1024/1024).toFixed(1) + " GB"}</div>
+      <div>Total Memory: ${data.totalmem}</div>
+      <div>Type: ${data.type}</div>
+      <div>Machine Type: ${data.machine}</div>
+      <div>Paralism: ${data.paralism}</div>
+      <div id="cpu">Cpu Cores: </div>
+        `;
+
+        root.innerHTML += get;
+        let core = data.cpus;
+let cpus = document.getElementById("cpu")
+        core.map((ele) => {
+          cpus.innerHTML += `<p> Model: ${ele.model} Speed: ${
+            ele.speed / 1000 + "GHZ"
+          }</p>`;
+        });
+      });
+  </script>
+</html>

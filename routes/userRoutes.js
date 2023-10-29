@@ -22,4 +22,6 @@ router.post("/user", verifyJwt, async (req, res) => {
   }
   res.send(newUser);
 });
+
+
 module.exports = router;

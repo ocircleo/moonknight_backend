@@ -10,13 +10,14 @@ const userRoute = require("./routes/userRoutes");
 const hostRoute = require("./routes/hostRoutes");
 const moderatorRoute = require("./routes/moderatorRoutes");
 const adminRoute = require("./routes/adminRoutes");
+const mailRoute = require("./routes/mailRoutes");
 /**
  * ===================
  *
  * RAHAT, THIS IS THE SKELETON OF OUR BACKEND CODE |
  * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/host", hostRoute);
  * PLEASE SWITCH TO DEV BRANCH BEFORE ANY WORK
- * 
+ *
  * ====================
  */
 //middleware
@@ -48,7 +49,7 @@ app.use("/user", userRoute);
 app.use("/host", hostRoute);
 app.use("/moderator", moderatorRoute);
 app.use("/admin", adminRoute);
-
+app.use("/mail", mailRoute);
 // default route for error handling
 app.use((req, res) => {
   res.status(404).send("<h1> 404! not a route</h1>");
