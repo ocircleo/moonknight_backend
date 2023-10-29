@@ -16,7 +16,6 @@
         scroll-padding-top: 60px;
       }
       .nav {
-        height: 50px;
         width: 100%;
         background-color: lightskyblue;
         position: fixed;
@@ -25,19 +24,22 @@
         align-items: center;
         justify-content: center;
         gap: 20px;
+        padding: 10px 0;
       }
       .nav a {
         font-weight: 900;
         text-decoration: none;
         font-size: 19px;
         color: black;
+        border: 1px dashed white;
+        padding: 0 5px;
       }
       .nav a:hover {
         color: white;
       }
 
       .nav-backup {
-        height: 50px;
+       min-height: 60px;
         width: 100%;
         background-color: white;
       }
@@ -156,7 +158,9 @@
   </head>
   <body>
     <div class="nav">
+      <a href="#general">General Api</a>
       <a href="#user">User Api</a>
+      <a href="#host">Host Api</a>
       <a href="#moderator">Moderator Api</a>
       <a href="#admin">Admin Api</a>
     </div>
@@ -166,8 +170,12 @@
         welcome to api docs of Moon knight project <br />
         hers all the api for our project
       </h1>
+      <h2 class="api-for sub-title" id="general">General Apis</h2>
+      <div id="general-api"></div>
       <h2 class="api-for sub-title" id="user">User Apis</h2>
       <div id="user-api"></div>
+      <h2 class="api-for sub-title" id="host">host Apis</h2>
+      <div id="host-api"></div>
       <h2 class="api-for sub-title" id="moderator">Moderator Apis</h2>
       <div id="moderator-api"></div>
       <h2 class="api-for sub-title" id="admin">Admin Apis</h2>
@@ -175,35 +183,33 @@
     </div>
   </body>
   <script>
+    let generalApiDiv = document.getElementById("general-api");
     let userApiDiv = document.getElementById("user-api");
+    let hostApiDiv = document.getElementById("host-api");
     let moderatorApiDiv = document.getElementById("moderator-api");
     let adminApiDiv = document.getElementById("admin-api");
-
+    let generalApi = [
+      {
+        link: "https://moonknight-backend.vercel.app/jwt",
+        method: "post",
+        title: "Gets jwt token",
+        detaill:
+          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
+      },
+    ];
     let userApi = [
       {
-        link: "https://moonkinghtLL.com/user",
-        method: "get",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
+        link: "https://moonknight-backend.vercel.app/user/create_user",
         method: "post",
-        title: "User login",
+        title: "Creates a user",
         detaill:
           "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
       },
+    ];
+    let hostApi = [
       {
-        link: "https://moonkinghtLL.com/user",
-        method: "put",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "delete",
+        link: "https://moonknight-backend.vercel.app/",
+        method: "get",
         title: "User login",
         detaill:
           "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
@@ -211,29 +217,8 @@
     ];
     let moderatorApi = [
       {
-        link: "https://moonkinghtLL.com/user",
+        link: "https://moonknight-backend.vercel.app/",
         method: "get",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "post",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "put",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "delete",
         title: "User login",
         detaill:
           "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
@@ -241,30 +226,9 @@
     ];
     let adminApi = [
       {
-        link: "https://moonkinghtLL.com/user",
+        link: "https://moonknight-backend.vercel.app/admin/status_info",
         method: "get",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "post",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "put",
-        title: "User login",
-        detaill:
-          "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
-      },
-      {
-        link: "https://moonkinghtLL.com/user",
-        method: "delete",
-        title: "User login",
+        title: "Gets status of server",
         detaill:
           "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus officia eum nihil, nulla non adipisci! Culpa debitis inventore obcaecati beatae.lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum voluptas doloribus libero ad, quod beatae aliquid dolorem sapiente accusantium recusandae vero sint impedit quam, iusto dolorum temporibus quo incidunt inventore?",
       },
@@ -291,7 +255,9 @@
       });
     }
 
+    pushData(generalApi, generalApiDiv);
     pushData(userApi, userApiDiv);
+    pushData(hostApi, hostApiDiv);
     pushData(moderatorApi, moderatorApiDiv);
     pushData(adminApi, adminApiDiv);
     let copyLink = document.getElementsByClassName("copy-link");
@@ -300,7 +266,7 @@
       copy.addEventListener("click", (e) => {
         let target = e.target;
         let link = target.parentElement.parentElement.children[1].innerText;
-        let mainLink = link.split(' ')[2];
+        let mainLink = link.split(" ")[2];
         navigator.clipboard.writeText(mainLink);
         target.innerText = "Link Copied";
         setTimeout(() => {

@@ -25,11 +25,12 @@
     fetch("/admin/status")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         let get = `
         <div>Platform: ${data.platform}</div>
         <div>Architecture: ${data.arch}</div>
       <div>Freemem: ${(data.freemem /1024/1024/1024).toFixed(1) + " GB"}</div>
-      <div>Total Memory: ${data.totalmem}</div>
+      <div>Total Memory: ${(data.totalmem / 1024/1024/1024).toFixed(1)+" GB"}</div>
       <div>Type: ${data.type}</div>
       <div>Machine Type: ${data.machine}</div>
       <div>Paralism: ${data.paralism}</div>
