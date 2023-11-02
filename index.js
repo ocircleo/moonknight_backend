@@ -8,14 +8,13 @@ const verifyJwt = require("./omniModules/jwt");
 //routes
 const userRoute = require("./routes/userRoutes");
 const hostRoute = require("./routes/hostRoutes");
-const moderatorRoute = require("./routes/moderatorRoutes");
 const adminRoute = require("./routes/adminRoutes");
 const mailRoute = require("./routes/mailRoutes");
 /**
  * ===================
  *
  * RAHAT, THIS IS THE SKELETON OF OUR BACKEND CODE |
- * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/host", hostRoute);
+ * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/user", hostRoute),app.use("/admin", adminRoute);;
  * PLEASE SWITCH TO DEV BRANCH BEFORE ANY WORK
  *
  * ====================
@@ -47,7 +46,6 @@ app.post("/jwt", (req, res) => {
 //routes
 app.use("/user", userRoute);
 app.use("/host", hostRoute);
-app.use("/moderator", moderatorRoute);
 app.use("/admin", adminRoute);
 app.use("/mail", mailRoute);
 // default route for error handling

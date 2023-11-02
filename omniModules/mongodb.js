@@ -13,6 +13,9 @@ const client = new MongoClient(uri, {
 const database = client.db("moonknight");
 const users = database.collection("users");
 const houses = database.collection("houses");
+const reviews = database.collection("reviews");
+const reports = database.collection("reports");
+const questions = database.collection("question");
 module.exports = { users, houses };
 async function mongoTest() {
   try {
