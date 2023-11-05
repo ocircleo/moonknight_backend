@@ -5,39 +5,25 @@ const path = require("path");
 const router = express.Router();
 const multer = require("multer");
 const uploadImage = require("../omniModules/uploadImage");
-const { initializeApp } = require("firebase/app");
-const {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} = require("firebase/storage");
-const app = require("../omniModules/firebase");
-// ===== multer =====
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     const name = Date.now() + "-" + file.originalname;
-//     cb(null, name);
-//   },
-// });
+const { uploadHouseImage, postHouse } = require("../modules/hostModule");
 const storage = multer.memoryStorage();
-const fireStorage = getStorage(app);
+
 // const upload = multer({ storage: storage });
 const upload = multer({ storage: storage });
 // ===== multer =====
 router.get("/", (req, res) => {
   res.send("<h1>welcome host</h1>");
 });
-router.post("/create_host", verifyJwt, (req, res) => {});
+router.post("/create_host", (req, res) => {});
 router.get("/test_html", (req, res) => {
   res.sendFile(path.join(__dirname, "../test_html_files/file.html"));
 });
-router.post("/upload_images", upload.single("images"), async (req, res) => {
-  const imgUrl = await uploadImage(req);
-  res.send(imgUrl);
-});
+
+router.get("/getMyHouses/:email",getMyHouses)
+router.put("/makeHost/:id",makeHost)
+router.post("/postHouse",postHouse)
+router.post( "/uploadImage",upload.single("image"),uploadImage,
+  uploadHouseImage
+);
 
 module.exports = router;
