@@ -1,27 +1,30 @@
 const express = require("express");
 const verifyJwt = require("../omniModules/jwt");
-const { users } = require("../omniModules/mongodb");
+const { users, houses, blog } = require("../omniModules/mongodb");
+const { ObjectId } = require("mongodb");
+const {
+  createUser,
+  findUser,
+  updateUser,
+  addToWhishList,
+  blogSearch,
+  ProductSearch,
+  updateImage,
+} = require("../modules/userModules");
 const router = express.Router();
-
+const multer = require("multer");
+const uploadImage = require("../omniModules/uploadImage");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 router.get("/", (req, res) => {
   res.send("<h1>welcome user</h1>");
 });
-router.post("/create_user", (req, res) => {});
-//testing not verified
-router.post("/user", verifyJwt, async (req, res) => {
-  const decodedEmail = req.decoded.user;
-  const requestEmail = req.body.email;
 
-  if (decodedEmail != requestEmail) {
-    res.status(401).send({ error: true, message: "unauthorized access" });
-  }
-  const newUser = await users.findOne(requestEmail);
-  if (!newUser) {
-    const inserting = await users.insertOne(requestEmail);
-    res.send(inserting)
-  }
-  res.send(newUser);
-});
-
-
+router.get("/getUser/:email", findUser);
+router.post("/createUser", createUser);
+router.get("/blogSearch/:search", blogSearch);
+router.get("/productSearch", ProductSearch);
+router.put("/updateImage", upload.single("profile"),uploadImage,updateImage);
+router.put("/updateUser", updateUser);
+router.put("/addToWhishList", addToWhishList);
 module.exports = router;

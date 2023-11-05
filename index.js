@@ -44,9 +44,9 @@ app.post("/jwt", (req, res) => {
 });
 
 //routes
-app.use("/user", userRoute);
+app.use("/user", userRoute); //Salman will work
 app.use("/host", hostRoute);
-app.use("/admin", adminRoute);
+app.use("/admin", adminRoute); //Rahat will work
 app.use("/mail", mailRoute);
 // default route for error handling
 app.use((req, res) => {

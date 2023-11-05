@@ -17,18 +17,18 @@
     </form>
   </body>
   <script>
-    let upload = document.getElementById("upload");
-    upload.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let form = e.target;
-      let image = form.images;
-      fetch("http://localhost:3000/host/upload_images", {
-        method: "post",
-        body: image,
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error));
-    });
+    // let upload = document.getElementById("upload");
+    // upload.addEventListener("submit", (e) => {
+    //   e.preventDefault();
+    //   let form = e.target;
+    //   let image = form.images;
+    //   fetch("http://localhost:3000/host/upload_images", {
+    //     method: "post",
+    //     body: image,
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => console.log(data))
+    //     .catch((error) => console.log(error));
+    // });
   </script>
 </html>
