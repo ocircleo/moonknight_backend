@@ -5,7 +5,7 @@ const path = require("path");
 const router = express.Router();
 const multer = require("multer");
 const uploadImage = require("../omniModules/uploadImage");
-const { uploadHouseImage, postHouse } = require("../modules/hostModule");
+const { uploadHouseImage, postHouse, getMyHouses, makeHost } = require("../modules/hostModule");
 const storage = multer.memoryStorage();
 
 // const upload = multer({ storage: storage });
@@ -18,10 +18,13 @@ router.post("/create_host", (req, res) => {});
 router.get("/test_html", (req, res) => {
   res.sendFile(path.join(__dirname, "../test_html_files/file.html"));
 });
-
+// done == need testing
 router.get("/getMyHouses/:email",getMyHouses)
+// done == need testing
 router.put("/makeHost/:id",makeHost)
+// in progress
 router.post("/postHouse",postHouse)
+// done == need testing
 router.post( "/uploadImage",upload.single("image"),uploadImage,
   uploadHouseImage
 );

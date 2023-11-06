@@ -18,13 +18,3 @@ const reports = database.collection("reports");
 const questions = database.collection("question");
 const blog = database.collection("blog");
 module.exports = { users, houses, blog };
-async function mongoTest() {
-  try {
-    // await client.connect();
-    // await client.db("admin").command({ ping: 1 });
-    // console.log("Pinged your deployment. Lets do some manipulation!");
-  } finally {
-    // await client.close();
-  }
-}
-mongoTest().catch(console.dir);
