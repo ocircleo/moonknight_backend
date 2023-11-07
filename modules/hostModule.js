@@ -18,7 +18,7 @@ const postHouse = async (req, res, next) => {
 };
 const uploadHouseImage = async (req, res, next) => {
   const newImageUrl = req.newUrl;
-  const id = req.body.id;
+  const id = req.body.postId;
   const result = await houses.updateOne(
     { _id: new ObjectId(id) },
     { $push: { images: newImageUrl } }

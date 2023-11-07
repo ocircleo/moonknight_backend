@@ -10,9 +10,10 @@ const {
   postBlog,
   getUsers,
 } = require("../modules/adminModules");
+const uploadImage = require("../omniModules/uploadImage");
 // console.log(os);
-const storage = multer.memoryStorage()
-const upload = multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 let data = {
   arch: os.arch(),
   platform: os.platform(),
@@ -36,9 +37,14 @@ router.get("/status", (req, res) => {
 router.get("/status_info", (req, res) => {
   res.sendFile(path.join(__dirname, "../test_html_files/status.html"));
 });
-router.get("/getUsers", getUsers);
+//done working
+router.get("/getUsers/:type", getUsers);
+//done untested
 router.get("/pendingPost", pendingPost);
+//in progress
 router.put("/approvePost", approvePost);
+// done untested
 router.put("/makeAdmin", makeAdmin);
-router.post("/postBLog", postBlog);
+//done tested
+router.post("/postBLog", upload.single("image"),uploadImage, postBlog);
 module.exports = router;

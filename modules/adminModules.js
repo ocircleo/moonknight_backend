@@ -2,6 +2,7 @@ const { ObjectId } = require("mongodb");
 const { houses, users, blog } = require("../omniModules/mongodb");
 const getUsers = async (req, res, next) => {
   const sorter = req.params.type;
+  console.log(sorter);
   let result;
   if (sorter == "all") {
     result = await users.find().toArray();
@@ -34,11 +35,12 @@ const makeAdmin = async (req, res, next) => {
 };
 const postBlog = async (req, res, next) => {
   const imgUrl = req.newUrl;
-  const { title, text } = req.body;
+  const data = req.body.name;
   const time = new Date();
   const newBlog = {
-    title: title,
-    text: text,
+    postedBy: req.body.id,
+    title: req.body.title,
+    description: req.body.description,
     imgUrl: imgUrl,
     time: time,
   };

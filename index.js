@@ -13,8 +13,7 @@ const mailRoute = require("./routes/mailRoutes");
 /**
  * ===================
  *
- * RAHAT, THIS IS THE SKELETON OF OUR BACKEND CODE |
- * YOU ARE ASSIGNED TO WORK ON THE HOST ROUTE ==> app.use("/user", hostRoute),app.use("/admin", adminRoute);;
+ * 
  * PLEASE SWITCH TO DEV BRANCH BEFORE ANY WORK
  *
  * ====================

@@ -8,7 +8,7 @@ const {
 const app = require("./firebase");
 const storage = getStorage(app);
 
-const uploadImage = async (req,res,next) => {
+const uploadImage = async (req, res, next) => {
   const id = req.body.id;
   const storageRef = ref(
     storage,
@@ -24,6 +24,6 @@ const uploadImage = async (req,res,next) => {
   );
   const downloadUrl = await getDownloadURL(snapshot.ref);
   req.newUrl = downloadUrl;
-  next()
+  next();
 };
 module.exports = uploadImage;
