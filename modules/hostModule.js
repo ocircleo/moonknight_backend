@@ -5,6 +5,9 @@ const getMyHouses = async (req, res, next) => {
   const result = await houses.findOne({ email: email });
   res.send(result);
 };
+const applyForHost = (req,res,next)=>{
+
+}
 const makeHost = async (req, res, next) => {
   const id = req.params.id;
   const result = await users.updateOne(
@@ -26,4 +29,4 @@ const uploadHouseImage = async (req, res, next) => {
   res.send(post);
 };
 
-module.exports = { uploadHouseImage, postHouse, getMyHouses, makeHost };
+module.exports = { uploadHouseImage, postHouse, getMyHouses, makeHost,applyForHost };

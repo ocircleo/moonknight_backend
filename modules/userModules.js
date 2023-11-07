@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const { users } = require("../omniModules/mongodb");
+const { users, questions } = require("../omniModules/mongodb");
 
 const findUser = async (req, res, next) => {
   const result = await users.findOne({ email: req.params.email });
@@ -101,6 +101,11 @@ const updateImage = async (req, res, next) => {
   );
   res.send(result);
 };
+const contactUs = async (req, res, next) => {
+  const data = req.body;
+  const result = await questions.insertOne(data);
+  res.send(result);
+};
 module.exports = {
   createUser,
   findUser,
@@ -109,4 +114,5 @@ module.exports = {
   blogSearch,
   ProductSearch,
   updateImage,
+  contactUs,
 };

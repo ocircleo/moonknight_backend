@@ -10,6 +10,7 @@ const {
   blogSearch,
   ProductSearch,
   updateImage,
+  contactUs,
 } = require("../modules/userModules");
 const router = express.Router();
 const multer = require("multer");
@@ -27,4 +28,5 @@ router.get("/productSearch", ProductSearch);
 router.put("/updateImage", upload.single("profile"),uploadImage,updateImage);
 router.put("/updateUser", updateUser);
 router.put("/addToWhishList", addToWhishList);
+router.post('/contact',contactUs)
 module.exports = router;

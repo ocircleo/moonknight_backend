@@ -17,4 +17,4 @@ const reviews = database.collection("reviews");
 const reports = database.collection("reports");
 const questions = database.collection("question");
 const blog = database.collection("blog");
-module.exports = { users, houses, blog };
+module.exports = { users, houses, blog,questions };
