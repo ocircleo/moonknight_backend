@@ -112,12 +112,13 @@ const updateImage = async (req, res, next) => {
 };
 const contactUs = async (req, res, next) => {
   const data = req.body;
+  data.body.status = "pending";
   const result = await questions.insertOne(data);
   res.send(result);
 };
 const getCard = async (req, res, next) => {
   const id = req.params.id;
-  const result = houses.findOne({ _id: new ObjectId(id) });
+  const result = await houses.findOne({ _id: new ObjectId(id) });
   res.send(result);
 };
 module.exports = {

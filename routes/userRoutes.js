@@ -27,7 +27,7 @@ router.get("/card/:id", getCard);
 router.get("/getUser/:email", findUser);
 router.post("/createUser", createUser);
 router.get("/blogSearch/:search", blogSearch);
-router.get("allBlog", getAllBlog);
+router.get("/allBlog", getAllBlog);
 router.get("/singleBlog/:id", singleBlog);
 router.get("/productSearch", ProductSearch);
 router.put("/updateImage", upload.single("profile"), uploadImage, updateImage);

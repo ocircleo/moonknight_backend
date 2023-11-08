@@ -46,16 +46,16 @@ router.get("/getUsers/:type", getUsers);
 //done untested
 router.get("/pendingPost", pendingPost);
 //done untested
-router.put("/approvePost/:id", approvePost);
+router.get("/approvePost/:id", approvePost);
 //done untested
-router.put("/denyPost/:id", denyPost);
+router.get("/denyPost/:id", denyPost);
 // done untested
-router.put("/makeAdmin", makeAdmin);
+router.get("/makeAdmin/:id", makeAdmin);
 //done untested
-router.put("/blocUser/:id", blockUser);
+router.get("/blockUser/:id", blockUser);
 //done tested
 router.post("/postBLog", upload.single("image"), uploadImage, postBlog);
 //done untested
 router.get("/getEmails", getEmail);
-router.delete("deleteEmail/:id", deleteEmail);
+router.delete("/deleteEmail/:id", deleteEmail);
 module.exports = router;

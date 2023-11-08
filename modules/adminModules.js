@@ -18,18 +18,18 @@ const pendingPost = async (req, res, next) => {
 };
 
 const approvePost = async (req, res, next) => {
-  const postId = req.params.id;
+  const id = req.params.id;
   const result = await houses.updateOne(
     { _id: new ObjectId(id) },
-    { status: "approved" }
+    { $set: { status: "approved" } }
   );
   res.send(result);
 };
 const denyPost = async (req, res, next) => {
-  const postId = req.params.id;
+  const id = req.params.id;
   const result = await houses.updateOne(
     { _id: new ObjectId(id) },
-    { status: "deny" }
+    { $set: { status: "denied" } }
   );
   res.send(result);
 };
@@ -38,10 +38,10 @@ const getEmail = async (req, res, next) => {
   res.send(result);
 };
 const makeAdmin = async (req, res, next) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const result = await users.updateOne(
     { _id: new ObjectId(id) },
-    { role: "admin" }
+    { $set: { role: "admin" } }
   );
   res.send(result);
 };
@@ -63,9 +63,10 @@ const blockUser = async (req, res, next) => {
   const id = req.params.id;
   const result = await users.updateOne(
     { _id: new ObjectId(id) },
-    { blocked: true },
+    { $set: { blocked: true } },
     { upsert: true }
   );
+  res.send(result);
 };
 const deleteEmail = async (req, res, next) => {
   const id = req.params.id;
