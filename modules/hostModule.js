@@ -15,7 +15,26 @@ const makeHost = async (req, res, next) => {
 };
 const postHouse = async (req, res, next) => {
   const data = req.body;
-  console.log(data);
+  Posts ={
+    title:
+    price:
+    city:
+    region:
+    area:
+    rooms:
+    beds:
+    bathroom:
+    garage: 
+    builtIn:
+    areaSqft:
+    comments: [ ] //
+    hostEmail:
+    description: 
+    floor:
+    images: [ ] //
+    maxPeople:
+    
+    } 
   res.send({ ok: "got data" });
   // const result = await houses.insertOne(data);
 };
