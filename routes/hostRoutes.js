@@ -28,7 +28,7 @@ router.get("/test_html", (req, res) => {
 router.get("/getMyHouses/:email", getMyHouses);
 // done == need testing
 router.put("/makeHost/:id", makeHost);
-router.put("/applyForHost",applyForHost);
+router.put("/applyForHost", applyForHost);
 // in progress
 router.post("/postHouse", postHouse);
 // done == need testing

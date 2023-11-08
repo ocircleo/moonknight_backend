@@ -5,9 +5,7 @@ const getMyHouses = async (req, res, next) => {
   const result = await houses.findOne({ email: email });
   res.send(result);
 };
-const applyForHost = (req,res,next)=>{
-
-}
+const applyForHost = (req, res, next) => {};
 const makeHost = async (req, res, next) => {
   const id = req.params.id;
   const result = await users.updateOne(
@@ -16,8 +14,10 @@ const makeHost = async (req, res, next) => {
   );
 };
 const postHouse = async (req, res, next) => {
-  const { data } = req.body;
-  const result = await houses.insertOne(data);
+  const data = req.body;
+  console.log(data);
+  res.send({ ok: "got data" });
+  // const result = await houses.insertOne(data);
 };
 const uploadHouseImage = async (req, res, next) => {
   const newImageUrl = req.newUrl;
@@ -29,4 +29,10 @@ const uploadHouseImage = async (req, res, next) => {
   res.send(post);
 };
 
-module.exports = { uploadHouseImage, postHouse, getMyHouses, makeHost,applyForHost };
+module.exports = {
+  uploadHouseImage,
+  postHouse,
+  getMyHouses,
+  makeHost,
+  applyForHost,
+};
