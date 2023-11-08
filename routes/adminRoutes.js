@@ -9,6 +9,10 @@ const {
   makeAdmin,
   postBlog,
   getUsers,
+  blockUser,
+  denyPost,
+  getEmail,
+  deleteEmail,
 } = require("../modules/adminModules");
 const uploadImage = require("../omniModules/uploadImage");
 // console.log(os);
@@ -41,10 +45,17 @@ router.get("/status_info", (req, res) => {
 router.get("/getUsers/:type", getUsers);
 //done untested
 router.get("/pendingPost", pendingPost);
-//in progress
-router.put("/approvePost", approvePost);
+//done untested
+router.put("/approvePost/:id", approvePost);
+//done untested
+router.put("/denyPost/:id", denyPost);
 // done untested
 router.put("/makeAdmin", makeAdmin);
+//done untested
+router.put("/blocUser/:id", blockUser);
 //done tested
-router.post("/postBLog", upload.single("image"),uploadImage, postBlog);
+router.post("/postBLog", upload.single("image"), uploadImage, postBlog);
+//done untested
+router.get("/getEmails", getEmail);
+router.delete("deleteEmail/:id", deleteEmail);
 module.exports = router;

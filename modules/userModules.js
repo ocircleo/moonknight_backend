@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const { users, questions } = require("../omniModules/mongodb");
+const { users, questions, houses, blog } = require("../omniModules/mongodb");
 
 const findUser = async (req, res, next) => {
   const result = await users.findOne({ email: req.params.email });
@@ -66,11 +66,20 @@ const addToWhishList = async (req, res, next) => {
     { $push: { Wishlist: id } }
   );
 };
+const getAllBlog = async (req, res, next) => {
+  const result = await blog.find().toArray();
+  res.send(result);
+};
 const blogSearch = async (req, res, next) => {
   const text = req.params.search;
   const result = await blog
     .find({ title: { $regex: text, $options: "i" } })
     .toArray();
+  res.send(result);
+};
+const singleBlog = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await blog.findOne({ _id: new ObjectId(id) });
   res.send(result);
 };
 const ProductSearch = async (req, res, next) => {
@@ -106,6 +115,11 @@ const contactUs = async (req, res, next) => {
   const result = await questions.insertOne(data);
   res.send(result);
 };
+const getCard = async (req, res, next) => {
+  const id = req.params.id;
+  const result = houses.findOne({ _id: new ObjectId(id) });
+  res.send(result);
+};
 module.exports = {
   createUser,
   findUser,
@@ -115,4 +129,7 @@ module.exports = {
   ProductSearch,
   updateImage,
   contactUs,
+  getCard,
+  getAllBlog,
+  singleBlog,
 };

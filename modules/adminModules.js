@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const { houses, users, blog } = require("../omniModules/mongodb");
+const { houses, users, blog, questions } = require("../omniModules/mongodb");
 const getUsers = async (req, res, next) => {
   const sorter = req.params.type;
   console.log(sorter);
@@ -18,11 +18,23 @@ const pendingPost = async (req, res, next) => {
 };
 
 const approvePost = async (req, res, next) => {
-  const postId = req.body.id;
+  const postId = req.params.id;
   const result = await houses.updateOne(
     { _id: new ObjectId(id) },
     { status: "approved" }
   );
+  res.send(result);
+};
+const denyPost = async (req, res, next) => {
+  const postId = req.params.id;
+  const result = await houses.updateOne(
+    { _id: new ObjectId(id) },
+    { status: "deny" }
+  );
+  res.send(result);
+};
+const getEmail = async (req, res, next) => {
+  const result = await questions.find({ status: "pending" }).toArray();
   res.send(result);
 };
 const makeAdmin = async (req, res, next) => {
@@ -47,4 +59,27 @@ const postBlog = async (req, res, next) => {
   const result = await blog.insertOne(newBlog);
   res.send(result);
 };
-module.exports = { getUsers, approvePost, pendingPost, makeAdmin, postBlog };
+const blockUser = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await users.updateOne(
+    { _id: new ObjectId(id) },
+    { blocked: true },
+    { upsert: true }
+  );
+};
+const deleteEmail = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await questions.deleteOne({ _id: new ObjectId(id) });
+  res.send(result);
+};
+module.exports = {
+  getUsers,
+  approvePost,
+  pendingPost,
+  makeAdmin,
+  postBlog,
+  blockUser,
+  denyPost,
+  getEmail,
+  deleteEmail,
+};
