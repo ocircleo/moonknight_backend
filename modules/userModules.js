@@ -50,6 +50,8 @@ const updateUser = async (req, res, next) => {
     verified: false,
     age: "unknown",
     currentStatus: "Unkonwn",
+    pending: true,
+    blocked: false,
   };
   delete body.email;
   console.log(email);

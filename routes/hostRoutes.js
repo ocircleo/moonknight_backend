@@ -9,7 +9,6 @@ const {
   uploadHouseImage,
   postHouse,
   getMyHouses,
-  makeHost,
   applyForHost,
 } = require("../modules/hostModule");
 const storage = multer.memoryStorage();
@@ -20,14 +19,12 @@ const upload = multer({ storage: storage });
 router.get("/", (req, res) => {
   res.send("<h1>welcome host</h1>");
 });
-router.post("/create_host", (req, res) => {});
 router.get("/test_html", (req, res) => {
   res.sendFile(path.join(__dirname, "../test_html_files/file.html"));
 });
 // done == need testing
 router.get("/getMyHouses/:email", getMyHouses);
 // done == need testing
-router.put("/makeHost/:id", makeHost);
 router.put("/applyForHost", applyForHost);
 // in progress
 router.post("/postHouse", postHouse);
@@ -38,5 +35,4 @@ router.post(
   uploadImage,
   uploadHouseImage
 );
-
 module.exports = router;
