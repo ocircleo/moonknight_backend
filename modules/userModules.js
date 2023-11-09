@@ -76,23 +76,43 @@ const singleBlog = async (req, res, next) => {
   res.send(result);
 };
 const ProductSearch = async (req, res, next) => {
-  const { city, price, region } = req.query;
+  const { city, price, region, skip } = req.query;
   console.log(req.query);
+  const options = {
+    projection: {
+      area: 0,
+      bathroom: 1,
+      beds: 1,
+      builtIn: 0,
+      city: 1,
+      comments: 0,
+      description: 0,
+      floor: 0,
+      garage: 1,
+      hostEmail: 0,
+      images: 1,
+      maxPeople: 0,
+      price: 1,
+      region: 1,
+      rooms: 1,
+      space: 1,
+      status: 0,
+      title: 1,
+      _id: 1,
+    },
+  };
+  const query = {
+    city: { $regex: city, $options: "i" },
+    region: { $regex: region, $options: "i" },
+  };
   if (price == 0) {
-    const result = await houses
-      .find({
-        city: { $regex: city, $options: "i" },
-        region: { $regex: region, $options: "i" },
-      })
-      .toArray();
+    const result = await houses.find(query).limit(12).toArray();
     res.send(result);
   } else {
     const result = await houses
-      .find({
-        city: { $regex: city, $options: "i" },
-        region: { $regex: region, $options: "i" },
-      })
+      .find(query)
       .sort({ price: price })
+      .limit(12)
       .toArray();
     res.send(result);
   }
