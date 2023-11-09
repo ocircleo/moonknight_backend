@@ -1,5 +1,6 @@
 const { ObjectId } = require("mongodb");
 const { users, questions, houses, blog } = require("../omniModules/mongodb");
+const { query } = require("express");
 
 const findUser = async (req, res, next) => {
   const result = await users.findOne({ email: req.params.email });
@@ -54,8 +55,9 @@ const addToWhishList = async (req, res, next) => {
   const userId = req.body.userId;
   const result = await users.updateOne(
     { _id: new ObjectId(userId) },
-    { $push: { Wishlist: id } }
+    { $push: { wishlist: id } }
   );
+  res.send(result);
 };
 const getAllBlog = async (req, res, next) => {
   const result = await blog.find().toArray();
@@ -74,23 +76,26 @@ const singleBlog = async (req, res, next) => {
   res.send(result);
 };
 const ProductSearch = async (req, res, next) => {
-  const { city, price, additional } = req.query;
-  const result = await houses
-    .find({
-      $and: [
-        { city: city },
-        { price: { $lt: price } },
-        { additional: additional },
-      ],
-    })
-    .toArray();
-  if (JSON.parse(result).length < 3) {
-    const newResult = await houses
-      .find({ $and: [{ city: city }, { price: { $lt: price } }] })
+  const { city, price, region } = req.query;
+  console.log(req.query);
+  if (price == 0) {
+    const result = await houses
+      .find({
+        city: { $regex: city, $options: "i" },
+        region: { $regex: region, $options: "i" },
+      })
       .toArray();
-    res.send(newResult);
+    res.send(result);
+  } else {
+    const result = await houses
+      .find({
+        city: { $regex: city, $options: "i" },
+        region: { $regex: region, $options: "i" },
+      })
+      .sort({ price: price })
+      .toArray();
+    res.send(result);
   }
-  res.send(result);
 };
 const updateImage = async (req, res, next) => {
   const newImageUrl = req.newUrl;
