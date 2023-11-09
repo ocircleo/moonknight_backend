@@ -54,7 +54,7 @@ const uploadHouseImage = async (req, res, next) => {
     { _id: new ObjectId(id) },
     { $push: { images: newImageUrl } }
   );
-  res.send(post);
+  res.send(result);
 };
 
 module.exports = {

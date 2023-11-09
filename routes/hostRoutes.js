@@ -29,7 +29,7 @@ router.put("/applyForHost", applyForHost);
 // in progress
 router.post("/postHouse", postHouse);
 // done == need testing
-router.post(
+router.put(
   "/uploadImage",
   upload.single("image"),
   uploadImage,
