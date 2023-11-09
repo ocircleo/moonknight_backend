@@ -17,13 +17,14 @@ const createUser = async (req, res, next) => {
       city: "add region",
       region: "add region",
       additional: "add location",
-      Wishlist: [],
-      Comments: [], //
-      History: [], //
-      Verification: "Un Verified",
-      Verified: false,
-      Age: "unknown",
+      wishlist: [],
+      comments: [], //
+      history: [], //
+      verification: false,
+      verified: false,
+      age: 0,
       currentStatus: "Unkonwn",
+      blocked: false,
     };
     const newResult = await users.insertOne(newUser);
   } else {
@@ -33,32 +34,20 @@ const createUser = async (req, res, next) => {
 // need to be updated
 const updateUser = async (req, res, next) => {
   const body = req.body;
-  const email = req.body.email;
-  const newUser = {
-    name: "unkown nsf",
-    email: req.body.email,
-    role: "user",
-    imageUrl: req.body.imageUrl || "Unknown",
-    phone: req.body.phoneNumber || "unknown",
-    city: "add region",
-    region: "add region",
-    additional: "add location",
-    wishlist: [],
-    comments: [], //
-    history: [], //
-    verification: "Un Verified",
-    verified: false,
-    age: "unknown",
-    currentStatus: "Unkonwn",
-    pending: true,
-    blocked: false,
+  const newData = {
+    name: body.name,
+    phone: body.phone,
+    city: body.city,
+    region: body.region,
+    additional: body.additional,
+    age: body.age,
   };
-  delete body.email;
-  console.log(email);
-  for (let ele in body) {
-    newUser[ele] = body[ele];
-  }
-  res.send({ name: "| hello Mello |" });
+  const result = await users.updateOne(
+    { _id: new ObjectId(body.id) },
+    { $set: newData },
+    { upsert: true }
+  );
+  res.send(result);
 };
 const addToWhishList = async (req, res, next) => {
   const id = req.body.id;
