@@ -13,6 +13,7 @@ const {
   denyPost,
   getEmail,
   deleteEmail,
+  searchUser,
 } = require("../modules/adminModules");
 const uploadImage = require("../omniModules/uploadImage");
 // console.log(os);
@@ -42,6 +43,7 @@ router.get("/status_info", (req, res) => {
   res.sendFile(path.join(__dirname, "../test_html_files/status.html"));
 });
 //done working
+router.get("/searchUser", searchUser);
 router.get("/getUsers/:type", getUsers);
 //done untested
 router.get("/pendingPost", pendingPost);

@@ -2,7 +2,7 @@ const { ObjectId } = require("mongodb");
 const { houses, users } = require("../omniModules/mongodb");
 const getMyHouses = async (req, res, next) => {
   const email = req.params.email;
-  const result = await houses.findOne({ email: email });
+  const result = await houses.find({ hostEmail: email }).toArray();
   res.send(result);
 };
 const applyForHost = async (req, res, next) => {

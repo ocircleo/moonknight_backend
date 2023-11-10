@@ -2,7 +2,6 @@ const { ObjectId } = require("mongodb");
 const { houses, users, blog, questions } = require("../omniModules/mongodb");
 const getUsers = async (req, res, next) => {
   const sorter = req.params.type;
-  console.log(sorter);
   let result;
   if (sorter == "all") {
     result = await users.find().toArray();
@@ -10,6 +9,17 @@ const getUsers = async (req, res, next) => {
     return;
   }
   result = await users.find({ role: sorter }).toArray();
+  res.send(result);
+};
+const searchUser = async (req, res, next) => {
+  const searchBy = req.query.filter;
+  const value = req.query.data;
+  let result;
+  if (searchBy == "email") {
+    result = await users.findOne({ email: value });
+  } else {
+    result = await users.findOne({ phone: value });
+  }
   res.send(result);
 };
 const pendingPost = async (req, res, next) => {
@@ -83,4 +93,5 @@ module.exports = {
   denyPost,
   getEmail,
   deleteEmail,
+  searchUser,
 };

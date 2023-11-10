@@ -14,6 +14,9 @@ const {
   getCard,
   getAllBlog,
   singleBlog,
+  removeFromWishList,
+  sendMessage,
+  myMessage,
 } = require("../modules/userModules");
 const router = express.Router();
 const multer = require("multer");
@@ -33,5 +36,8 @@ router.get("/productSearch", ProductSearch);
 router.put("/updateImage", upload.single("profile"), uploadImage, updateImage);
 router.put("/updateUser", updateUser);
 router.put("/addToWhishList", addToWhishList);
+router.put("/removeFromWishList", removeFromWishList);
 router.post("/contact", contactUs);
+router.post("/sendMessage", sendMessage);
+router.get("/myMessage", myMessage);
 module.exports = router;
