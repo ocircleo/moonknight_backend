@@ -68,9 +68,10 @@ const addToWhishList = async (req, res, next) => {
 const removeFromWishList = async (req, res, next) => {
   const id = req.body.id;
   const userId = req.body.userId;
+  console.log(id, userId);
   const result = await users.updateOne(
     { _id: new ObjectId(userId) },
-    { $pop: { wishlist: id } }
+    { $pull: { wishlist: id } }
   );
   res.send(result);
 };
@@ -143,7 +144,8 @@ const updateImage = async (req, res, next) => {
 };
 const contactUs = async (req, res, next) => {
   const data = req.body;
-  data.body.status = "pending";
+  data.time = new Date();
+  data.status = "pending";
   const result = await questions.insertOne(data);
   res.send(result);
 };
@@ -169,7 +171,7 @@ const sendMessage = async (req, res, next) => {
 const myMessage = async (req, res, next) => {
   const mail = req.body.mail;
   const result = await message.find({ hostEmail: mail }).toArray();
-  res.send(result)
+  res.send(result);
 };
 module.exports = {
   createUser,
@@ -185,5 +187,5 @@ module.exports = {
   singleBlog,
   removeFromWishList,
   myMessage,
-  sendMessage
+  sendMessage,
 };

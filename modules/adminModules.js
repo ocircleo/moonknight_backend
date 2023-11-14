@@ -43,10 +43,7 @@ const denyPost = async (req, res, next) => {
   );
   res.send(result);
 };
-const getEmail = async (req, res, next) => {
-  const result = await questions.find({ status: "pending" }).toArray();
-  res.send(result);
-};
+
 const makeAdmin = async (req, res, next) => {
   const id = req.params.id;
   const result = await users.updateOne(
@@ -78,9 +75,17 @@ const blockUser = async (req, res, next) => {
   );
   res.send(result);
 };
+const getEmail = async (req, res, next) => {
+  const result = await questions.find({ status: "pending" }).toArray();
+  res.send(result);
+};
 const deleteEmail = async (req, res, next) => {
   const id = req.params.id;
-  const result = await questions.deleteOne({ _id: new ObjectId(id) });
+  console.log(id);
+  const result = await questions.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { status: "replied" } }
+  );
   res.send(result);
 };
 module.exports = {

@@ -11,6 +11,8 @@ const {
   getMyHouses,
   applyForHost,
 } = require("../modules/hostModule");
+const cors = require("cors");
+router.use(cors());
 const storage = multer.memoryStorage();
 
 // const upload = multer({ storage: storage });

@@ -3,6 +3,8 @@ const router = express.Router();
 const os = require("os");
 const path = require("path");
 const multer = require("multer");
+const cors = require("cors");
+router.use(cors());
 const {
   approvePost,
   pendingPost,
@@ -59,5 +61,5 @@ router.get("/blockUser/:id", blockUser);
 router.post("/postBLog", upload.single("image"), uploadImage, postBlog);
 //done untested
 router.get("/getEmails", getEmail);
-router.delete("/deleteEmail/:id", deleteEmail);
+router.get("/hideEmail/:id", deleteEmail);
 module.exports = router;

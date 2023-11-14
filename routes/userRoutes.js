@@ -2,6 +2,8 @@ const express = require("express");
 const verifyJwt = require("../omniModules/jwt");
 const { users, houses, blog } = require("../omniModules/mongodb");
 const { ObjectId } = require("mongodb");
+const cors = require('cors');
+
 const {
   createUser,
   findUser,
@@ -19,6 +21,7 @@ const {
   myMessage,
 } = require("../modules/userModules");
 const router = express.Router();
+router.use(cors())
 const multer = require("multer");
 const uploadImage = require("../omniModules/uploadImage");
 const storage = multer.memoryStorage();
