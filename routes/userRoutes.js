@@ -2,7 +2,7 @@ const express = require("express");
 const verifyJwt = require("../omniModules/jwt");
 const { users, houses, blog } = require("../omniModules/mongodb");
 const { ObjectId } = require("mongodb");
-const cors = require('cors');
+const cors = require("cors");
 
 const {
   createUser,
@@ -19,9 +19,11 @@ const {
   removeFromWishList,
   sendMessage,
   myMessage,
+  postComment,
+  getComment,
 } = require("../modules/userModules");
 const router = express.Router();
-router.use(cors())
+router.use(cors());
 const multer = require("multer");
 const uploadImage = require("../omniModules/uploadImage");
 const storage = multer.memoryStorage();
@@ -42,5 +44,7 @@ router.put("/addToWhishList", addToWhishList);
 router.put("/removeFromWishList", removeFromWishList);
 router.post("/contact", contactUs);
 router.post("/sendMessage", sendMessage);
-router.get("/myMessage", myMessage);
+router.get("/myMessage/:mail", myMessage);
+router.post("/comment", postComment);
+router.get("/comment/:id", getComment);
 module.exports = router;

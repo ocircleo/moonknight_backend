@@ -5,6 +5,7 @@ const {
   houses,
   blog,
   message,
+  reviews,
 } = require("../omniModules/mongodb");
 const { query } = require("express");
 
@@ -68,7 +69,6 @@ const addToWhishList = async (req, res, next) => {
 const removeFromWishList = async (req, res, next) => {
   const id = req.body.id;
   const userId = req.body.userId;
-  console.log(id, userId);
   const result = await users.updateOne(
     { _id: new ObjectId(userId) },
     { $pull: { wishlist: id } }
@@ -156,21 +156,41 @@ const getCard = async (req, res, next) => {
 };
 const sendMessage = async (req, res, next) => {
   const userEmail = req.body.userEmail;
+  const userName = req.body.userName;
   const hostEmail = req.body.hostEmail;
   const text = req.body.text;
-  const userName = req.body.name;
+  const date = req.body.date;
+
   const data = {
     userEmail: userEmail,
     hostEmail: hostEmail,
     text: text,
     userName: userName,
+    date: date,
   };
   const result = await message.insertOne(data);
   res.send(result);
 };
 const myMessage = async (req, res, next) => {
-  const mail = req.body.mail;
+  const mail = req.params.mail;
   const result = await message.find({ hostEmail: mail }).toArray();
+  res.send(result);
+};
+const postComment = async (req, res, next) => {
+  let data = req.body;
+  data.data = new Date();
+  const result = await reviews.insertOne(data);
+  const id = `${result.insertedId}`;
+
+  const newResult = await houses.updateOne(
+    { _id: new ObjectId(data.postId) },
+    { $push: { comments: id } }
+  );
+  res.send(newResult);
+};
+const getComment = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await reviews.findOne({ _id: new ObjectId(id) });
   res.send(result);
 };
 module.exports = {
@@ -188,4 +208,6 @@ module.exports = {
   removeFromWishList,
   myMessage,
   sendMessage,
+  postComment,
+  getComment,
 };

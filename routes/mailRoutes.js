@@ -47,4 +47,20 @@ router.post("/send_mail", (req, res) => {
     }
   });
 });
+router.post("/book_mail", (req, body) => {
+  const msg = req.body;
+  const data = {
+    from: `${msg.name} <request@moonknightll.web.app>`,
+    to: [msg.to],
+    subject: `property booking request from ${msg.name}`,
+    text: msg.text,
+  };
+  mg.messages().send(data, (error, body) => {
+    if (error) {
+      res.send({ error: true, message: JSON.stringify(error) });
+    } else {
+      res.send(JSON.stringify(body));
+    }
+  });
+});
 module.exports = router;
