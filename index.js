@@ -10,10 +10,11 @@ const userRoute = require("./routes/userRoutes");
 const hostRoute = require("./routes/hostRoutes");
 const adminRoute = require("./routes/adminRoutes");
 const mailRoute = require("./routes/mailRoutes");
+const paymentRouter = require("./routes/paymentRoute");
 /**
  * ===================
  *
- * 
+ *
  * PLEASE SWITCH TO DEV BRANCH BEFORE ANY WORK
  *
  * ====================
@@ -47,6 +48,7 @@ app.use("/user", userRoute); //Salman will work
 app.use("/host", hostRoute);
 app.use("/admin", adminRoute); //Rahat will work
 app.use("/mail", mailRoute);
+app.use("/pay", paymentRouter);
 // default route for error handling
 app.use((req, res) => {
   res.status(404).send("<h1> 404! not a route</h1>");

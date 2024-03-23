@@ -18,4 +18,5 @@ const reports = database.collection("reports");
 const questions = database.collection("question");
 const message = database.collection("message");
 const blog = database.collection("blog");
-module.exports = { users, houses, blog, questions, message,reviews };
+const payment = database.collection("payment");
+module.exports = { users, houses, blog, questions, message,reviews,payment };
