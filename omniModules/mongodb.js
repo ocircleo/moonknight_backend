@@ -16,15 +16,21 @@ const houses = database.collection("houses");
 const reviews = database.collection("reviews");
 const reports = database.collection("reports");
 const questions = database.collection("question");
+const message = database.collection("message");
 const blog = database.collection("blog");
-module.exports = { users, houses, blog };
-async function mongoTest() {
-  try {
-    // await client.connect();
-    // await client.db("admin").command({ ping: 1 });
-    // console.log("Pinged your deployment. Lets do some manipulation!");
-  } finally {
-    // await client.close();
-  }
-}
-mongoTest().catch(console.dir);
+const payment = database.collection("payment");
+const payment_success = database.collection("paymentsuccess");
+const payment_failed = database.collection("paymentfailed");
+const payment_status = database.collection("paymentstatus");
+module.exports = {
+  users,
+  houses,
+  blog,
+  questions,
+  message,
+  reviews,
+  payment,
+  payment_success,
+  payment_failed,
+  payment_status,
+};
