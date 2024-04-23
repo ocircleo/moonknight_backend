@@ -19,4 +19,18 @@ const questions = database.collection("question");
 const message = database.collection("message");
 const blog = database.collection("blog");
 const payment = database.collection("payment");
-module.exports = { users, houses, blog, questions, message,reviews,payment };
+const payment_success = database.collection("paymentsuccess");
+const payment_failed = database.collection("paymentfailed");
+const payment_status = database.collection("paymentstatus");
+module.exports = {
+  users,
+  houses,
+  blog,
+  questions,
+  message,
+  reviews,
+  payment,
+  payment_success,
+  payment_failed,
+  payment_status,
+};

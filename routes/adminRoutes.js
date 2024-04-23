@@ -16,6 +16,8 @@ const {
   getEmail,
   deleteEmail,
   searchUser,
+  updatePost,
+  updateBlog,
 } = require("../modules/adminModules");
 const uploadImage = require("../omniModules/uploadImage");
 // console.log(os);
@@ -53,6 +55,10 @@ router.get("/pendingPost", pendingPost);
 router.get("/approvePost/:id", approvePost);
 //done untested
 router.get("/denyPost/:id", denyPost);
+//
+router.put("/updatePost", updatePost);
+//
+router.put("/updateBlog", updateBlog);
 // done untested
 router.get("/makeAdmin/:id", makeAdmin);
 //done untested

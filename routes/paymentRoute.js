@@ -1,7 +1,7 @@
 const express = require("express");
-const { paymentInit, payMentValidate } = require("../modules/paymentModule");
+const { paymentInit, myPayments } = require("../modules/paymentModule");
 const paymentRouter = express.Router();
 
 paymentRouter.post("/paymentInit", paymentInit);
-paymentRouter.post("/paymentValidate", payMentValidate);
+paymentRouter.post("/mypayments", myPayments);
 module.exports = paymentRouter;

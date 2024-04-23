@@ -1,16 +1,16 @@
 const SSLCommerzPayment = require("sslcommerz-lts");
-const { payment } = require("../omniModules/mongodb");
+const { payment, payment_status } = require("../omniModules/mongodb");
 
 const store_id = "moonk65fd87ef3b729";
 const store_passwd = "moonk65fd87ef3b729@ssl";
 const is_live = false;
 const transId = Date.now();
 const paymentInit = async (req, res, next) => {
-  const { price, email, name, date, days } = req.body;
+  const { price, email, name, date, days, house_id } = req.body;
   const data = {
     total_amount: price,
     currency: "BDT",
-    tran_id: `REF123${transId}`, // use unique tran_id for each api call
+    tran_id: `${email + transId}`, // use unique tran_id for each api call
     success_url: `https://moonknightll.web.app/paysucces?id=REF123${transId}`,
     fail_url: "http://localhost:5173/fail",
     cancel_url: "http://localhost:5173/cancel",
@@ -37,25 +37,37 @@ const paymentInit = async (req, res, next) => {
     ship_postcode: 1000,
     ship_country: "Bangladesh",
   };
-  const newdata = data;
-  newdata.date = date;
-  newdata.days = days;
-  newdata.payed = false;
-  const result = await payment.insertOne(data);
+  const databaseInfo = {
+    ...data,
+    time: transId,
+    date: date,
+    days: days,
+    paid: false,
+    house_id: house_id,
+  };
+  const result = await payment.insertOne(databaseInfo);
   const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
   sslcz.init(data).then((apiResponse) => {
     // Redirect the user to payment gateway
     let GatewayPageURL = apiResponse.GatewayPageURL;
     res.send({ url: GatewayPageURL, result });
   });
+  setTimeout(async () => {
+    sslcz.transactionQueryByTransactionId(data).then(async (data) => {
+      let newTranId = databaseInfo.tran_id;
+      const test = await payment.findOne({ tran_id: newTranId });
+      if (data.element[0].status == "VALID") {
+        const newResult = await payment.updateOne(
+          { tran_id: newTranId },
+          { $set: { paid: true } }
+        );
+      }
+    });
+  }, 5 * 60 * 1000);
 };
-const payMentValidate = async (req, res, next) => {
-  const { tran_id, status } = req.body;
-  if (status == "VALID") {
-    const result = await payment.updateOne(
-      { tran_id: id },
-      { $set: { payed: true } }
-    );
-  }
+const myPayments = async (req, res, next) => {
+  const { email } = req.body;
+  const result = await payment.find({ cus_email: email }).toArray();
+  res.send(result);
 };
-module.exports = { paymentInit, payMentValidate };
+module.exports = { paymentInit, myPayments };

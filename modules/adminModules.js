@@ -43,6 +43,18 @@ const denyPost = async (req, res, next) => {
   );
   res.send(result);
 };
+const updatePost = async (req, res, next) => {
+  const body = req.body;
+  const id = body.id;
+  delete body.id;
+  const result = await houses.updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: body,
+    }
+  );
+  res.send(result);
+};
 
 const makeAdmin = async (req, res, next) => {
   const id = req.params.id;
@@ -64,6 +76,19 @@ const postBlog = async (req, res, next) => {
     time: time,
   };
   const result = await blog.insertOne(newBlog);
+  res.send(result);
+};
+const updateBlog = async (req, res, next) => {
+  const { _id, title, description } = req.body;
+  const result = await blog.updateOne(
+    { _id: new ObjectId(_id) },
+    {
+      $set: {
+        title: title,
+        description: description,
+      },
+    }
+  );
   res.send(result);
 };
 const blockUser = async (req, res, next) => {
@@ -94,8 +119,10 @@ module.exports = {
   pendingPost,
   makeAdmin,
   postBlog,
+  updateBlog,
   blockUser,
   denyPost,
+  updatePost,
   getEmail,
   deleteEmail,
   searchUser,
