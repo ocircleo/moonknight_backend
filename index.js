@@ -45,17 +45,17 @@ app.get("/test", async (req, res) => {
 });
 //Jwt token request
 app.post("/jwt", (req, res) => {
-  const user = req.body;
-  const token = jwt.sign(user, process.env.ACCES_TOKEN_SECRET, {
+  const { user } = req.body;
+  const token = jwt.sign({ email: user }, process.env.ACCES_TOKEN_SECRET, {
     expiresIn: "24h",
   });
   res.send({ token });
 });
 
 //routes
-app.use("/user", userRoute); 
+app.use("/user", userRoute);
 app.use("/host", hostRoute);
-app.use("/admin", adminRoute); 
+app.use("/admin", adminRoute);
 app.use("/mail", mailRoute);
 app.use("/pay", paymentRouter);
 // default route for error handling

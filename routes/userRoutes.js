@@ -21,6 +21,7 @@ const {
   myMessage,
   postComment,
   getComment,
+  getEstimate,
 } = require("../modules/userModules");
 const router = express.Router();
 router.use(cors());
@@ -31,6 +32,7 @@ const upload = multer({ storage: storage });
 router.get("/", (req, res) => {
   res.send("<h1>welcome user</h1>");
 });
+router.get("/getEstimate", getEstimate);
 router.get("/card/:id", getCard);
 router.get("/getUser/:email", findUser);
 router.post("/createUser", createUser);
@@ -47,4 +49,5 @@ router.post("/sendMessage", sendMessage);
 router.get("/myMessage/:mail", myMessage);
 router.post("/comment", postComment);
 router.get("/comment/:id", getComment);
+
 module.exports = router;

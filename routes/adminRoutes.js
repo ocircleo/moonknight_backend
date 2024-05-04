@@ -18,6 +18,8 @@ const {
   searchUser,
   updatePost,
   updateBlog,
+  deletePost,
+  deleteBlog,
 } = require("../modules/adminModules");
 const uploadImage = require("../omniModules/uploadImage");
 // console.log(os);
@@ -68,4 +70,6 @@ router.post("/postBLog", upload.single("image"), uploadImage, postBlog);
 //done untested
 router.get("/getEmails", getEmail);
 router.get("/hideEmail/:id", deleteEmail);
+router.get("/deletePost/:id", deletePost);
+router.get("/deleteBLog/:id", deleteBlog);
 module.exports = router;
