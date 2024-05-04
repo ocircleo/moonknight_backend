@@ -6,9 +6,15 @@ const {
   blog,
   message,
   reviews,
+  payment,
 } = require("../omniModules/mongodb");
 const { query } = require("express");
-
+const getEstimate = async (req, res) => {
+  let usersCount = await users.countDocuments();
+  let housesCount = await houses.countDocuments();
+  let agentCount = await users.find({ role: "host" }).toArray();
+  res.send({ usersCount, housesCount, agentCount: agentCount.length });
+};
 const findUser = async (req, res, next) => {
   const result = await users.findOne({ email: req.params.email });
   res.send(result);
@@ -193,7 +199,13 @@ const getComment = async (req, res, next) => {
   const result = await reviews.findOne({ _id: new ObjectId(id) });
   res.send(result);
 };
+const myPayments = async (req, res, next) => {
+  const email = req.query.email;
+  const result = await payment.find({ hostEmail: email }).toArray();
+  res.send(result);
+};
 module.exports = {
+  getEstimate,
   createUser,
   findUser,
   updateUser,
@@ -210,4 +222,5 @@ module.exports = {
   sendMessage,
   postComment,
   getComment,
+  myPayments,
 };

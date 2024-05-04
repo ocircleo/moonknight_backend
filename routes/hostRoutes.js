@@ -12,6 +12,7 @@ const {
   applyForHost,
 } = require("../modules/hostModule");
 const cors = require("cors");
+const { myPayments } = require("../modules/userModules");
 router.use(cors());
 const storage = multer.memoryStorage();
 
@@ -29,6 +30,8 @@ router.get("/getMyHouses/:email", getMyHouses);
 // done == need testing
 router.put("/applyForHost", applyForHost);
 // in progress
+//
+router.get("/myPayments/:email", myPayments);
 router.post("/postHouse", postHouse);
 // done == need testing
 router.put(

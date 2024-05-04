@@ -113,6 +113,20 @@ const deleteEmail = async (req, res, next) => {
   );
   res.send(result);
 };
+
+const deleteBlog = async (req, res, next) => {
+  const id = req.params.id;
+  const result = await blog.deleteOne({ _id: new ObjectId(id) });
+  console.log(result);
+  res.send(result);
+};
+const deletePost = async (req,res,next) => {
+  const id = req.params.id;
+  const result = await houses.deleteOne({ _id: new ObjectId(id) });
+  console.log(result);
+  res.send(result);
+};
+
 module.exports = {
   getUsers,
   approvePost,
@@ -126,4 +140,6 @@ module.exports = {
   getEmail,
   deleteEmail,
   searchUser,
+  deleteBlog,
+  deletePost,
 };
